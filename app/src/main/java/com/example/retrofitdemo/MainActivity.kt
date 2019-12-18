@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofitdemo.Model.Android
 import com.example.retrofitdemo.Model.DataAdapter
 import com.example.retrofitdemo.Model.Destination
+import com.example.retrofitdemo.Model.Ordercontent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,25 +20,33 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     var dataList:ArrayList<Android>?=null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        loadJSON()
-    }
+        loadJSON() }
 
     private fun loadJSON() {
         Log.e("retro","loadJSON")
-
-         var client=ApiClient()
-        client.loadUserData().observeOn(AndroidSchedulers.mainThread())
+        var client=ApiClient()
+        client.loadUserData().
+            observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(this::handleResponse)
 
+//        client.registerUser("reshma","123","123")
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeOn(Schedulers.io())
+//            .subscribe(this::handleRegister)
     }
+    private fun handleResponse(androidList: List<Ordercontent>) {
 
-    private fun handleResponse(androidList: List<Destination>) {
+        androidList.forEach()
+        {
+            Log.e("retro",it.employeeName)
+        }
+//        initRecyclerView(androidList)
+    }
+    private fun handleRegister(androidList: List<Destination>) {
 
         androidList.forEach()
         {
